@@ -45,7 +45,6 @@
 		22B5261028BC90490053538B /* BaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B525F128BC90490053538B /* BaseButton.swift */; };
 		22B5263128BC90F80053538B /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B5261228BC90F80053538B /* SplashViewController.swift */; };
 		22B5263328BC90F80053538B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B5261528BC90F80053538B /* MainViewController.swift */; };
-		22B5266428BC92A00053538B /* HomeListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B5264D28BC92A00053538B /* HomeListCollectionViewCell.swift */; };
 		22B5267228BC92A00053538B /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B5265E28BC92A00053538B /* HomeViewController.swift */; };
 		22B5267828BCAF860053538B /* PhotosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B5267728BCAF860053538B /* PhotosView.swift */; };
 		22B5267A28BCB2990053538B /* HomeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B5267928BCB2990053538B /* HomeService.swift */; };
@@ -118,7 +117,6 @@
 		22B525F128BC90490053538B /* BaseButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseButton.swift; sourceTree = "<group>"; };
 		22B5261228BC90F80053538B /* SplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		22B5261528BC90F80053538B /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		22B5264D28BC92A00053538B /* HomeListCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeListCollectionViewCell.swift; sourceTree = "<group>"; };
 		22B5265E28BC92A00053538B /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		22B5267728BCAF860053538B /* PhotosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosView.swift; sourceTree = "<group>"; };
 		22B5267928BCB2990053538B /* HomeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeService.swift; sourceTree = "<group>"; };
@@ -325,7 +323,6 @@
 		22B5264B28BC92A00053538B /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				22B5264D28BC92A00053538B /* HomeListCollectionViewCell.swift */,
 				22B5267D28BCB4A30053538B /* PhotosCell.swift */,
 			);
 			path = Cells;
@@ -659,7 +656,6 @@
 				22B5260D28BC90490053538B /* BaseLabel.swift in Sources */,
 				22B5267828BCAF860053538B /* PhotosView.swift in Sources */,
 				22B5260928BC90490053538B /* AppEnum.swift in Sources */,
-				22B5266428BC92A00053538B /* HomeListCollectionViewCell.swift in Sources */,
 				22B5260328BC90490053538B /* BundleExtension.swift in Sources */,
 				22B5267E28BCB4A30053538B /* PhotosCell.swift in Sources */,
 				22B5268028BCC97E0053538B /* DetailsViewController.swift in Sources */,

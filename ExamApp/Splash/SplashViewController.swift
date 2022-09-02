@@ -18,7 +18,7 @@ class SplashViewController: BaseViewController {
     private let ciImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = UIImage(named: "splash02")
+        imageView.image = UIImage(named: "splash")
         imageView.contentMode = .scaleAspectFill
         return imageView
     }()

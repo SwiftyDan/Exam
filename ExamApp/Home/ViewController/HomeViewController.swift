@@ -103,7 +103,7 @@ final class HomeViewController: BaseViewController {
         btn.title("Search", color: .lightGray, size: 15, alignment: .left, isBold: false)
         btn.image(normal: "icoSearch")
        // btn.layer.cornerRadius = 20
-      
+        btn.addTarget(self, action: #selector(didClickSearchButton), for: .touchUpInside)
         btn.alignHorizontal(spacing: 10)
         return btn
     }()
@@ -120,13 +120,16 @@ final class HomeViewController: BaseViewController {
     let containerView = UIView()
 
 
+    @objc private func didClickSearchButton() {
+        
+        let vc = SearchVC(text:"", searchCode: String(10))
+        show(vc)
 
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-      
         initialSetting()
         view.addSubview(scrollContentView)
         view.addSubview(searchView)
@@ -202,7 +205,7 @@ final class HomeViewController: BaseViewController {
     
     private func getCategory() {
         
-        HomeService().getPhotos() { [weak self] (result, error) in
+        HomeService().getRecipes(q:"salad") { [weak self] (result, error) in
        
             guard let self = self, let result = result else{return}
           
@@ -277,6 +280,40 @@ extension HomeViewController {
 
     
     }
+    func returnConfigure(selected: [SelectedMenu]) {
+        
+        guard let sel = selectedMenuMartx else {
+            selectedMenuMartx = selected
+           
+           
+           
+            return
+        }
+        let selectedMenu = sel + selected
+        selectedMenuMartx = selectedMenu
+        
+        if sel.contains(where: {$0.recipe_id == selected[0].recipe_id}) {
+            var selectedMenu = [SelectedMenu]()
+            for i in 0 ..< sel.count {
+                if let hashKey = sel[i].recipe_id, hashKey != "" {
+                    if hashKey == selected[0].recipe_id {
+                        let newSel = sel[i]
+                      
+                        selectedMenu.append(newSel)
+                    } else {
+                        selectedMenu.append(sel[i])
+                    }
+                }
+            }
+            selectedMenuMartx = selectedMenu
+            
+        } else {
+            let selectedMenu = sel + selected
+            selectedMenuMartx = selectedMenu
+        }
+        
+  
+    }
 }
 
 
@@ -305,11 +342,16 @@ struct HomeViewController_Previews: PreviewProvider {
 
 // MARK: - CategoryViewDelegate
 extension HomeViewController: CategoryViewDelegate {
-    func categoryViewDidSelect(_ view: CategoryView, category: Photos) {
-      
-            let vc = DetailsViewController(data: category)
+    func categoryViewDidSelect(_ view: CategoryView, category: Recipe) {
+        var selectedMenu = [SelectedMenu]()
+        selectedMenu.append(SelectedMenu(["title":category.title ?? "", "publisher":category.publisher ?? "", "source_url": category.source_url ?? "", "image_url": category.image_url ?? "", "social_rank": category.social_rank ?? "", "publisher_url": category.publisher_url ?? "","recipe_id": category.recipe_id ?? ""]))
+       
+     returnConfigure(selected: selectedMenu)
+
+        let vc = DetailsViewController(category)
             show(vc)
 
     }
-
+    
+    
 }

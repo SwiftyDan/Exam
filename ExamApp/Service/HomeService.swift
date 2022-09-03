@@ -10,20 +10,42 @@ import SwiftyJSON
 import Alamofire
 
 class HomeService {
+    func getSearchResultMart(searchText:String, completion: @escaping ([Recipe]?, String?, Error?) -> Void) {
+        let param : Parameters = [
+            "q" : searchText
+            
+        ]
+        let loginHeaders: HTTPHeaders = ["Accept-Language" : getLanguage()]
     
-    func getPhotos(completion: @escaping ([Photos]?, Error?) -> Void) {
-
-
-        Alamofire.request(networkUrl, method: .get, encoding: URLEncoding.httpBody).responseJSON { (response) in
+        
+        Alamofire.request(networkUrl+searchText, method: .get, encoding: URLEncoding.httpBody).responseJSON { (response) in
+            
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
                 
-              
-     
+
                 
-                let data = json.array?.map{Photos($0)}
-                print(data,"WTDASDSA")
+                let data = json["recipes"].array?.map{Recipe($0)}
+                
+                completion(data, nil, nil)
+                
+            case .failure(let error):
+             
+                completion(nil, nil, error)
+            }
+        }
+    }
+    func getRecipes(q: String,completion: @escaping ([Recipe]?, Error?) -> Void) {
+     
+        Alamofire.request(networkUrl+q, method: .get, encoding: URLEncoding.httpBody).responseJSON { (response) in
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                
+           
+                let data = json["recipes"].array?.map{Recipe($0)}
+               
                 completion(data, nil)
                 
             case .failure(let error):

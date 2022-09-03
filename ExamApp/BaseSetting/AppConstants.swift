@@ -9,7 +9,7 @@
 import UIKit
 
 
-let networkUrl = "https://jsonplaceholder.typicode.com/photos"
+let networkUrl = "https://forkify-api.herokuapp.com/api/search?q="
 
 
 let screen_width = UIScreen.main.bounds.width

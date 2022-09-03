@@ -412,7 +412,51 @@ var loginTokenx: String? {
         ud.synchronize()
     }
 }
+var selectedMenuMartx: [SelectedMenu]? {
+    get {
+        if let loadedData = UserDefaults().data(forKey: ukSelectedMenuMart) {
+            
+            return try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(loadedData) as? [SelectedMenu]
 
+        }
+        return nil
+    }
+    set(v) {
+        
+        if let value = v {
+            guard let archiveData = try? NSKeyedArchiver.archivedData(withRootObject: value, requiringSecureCoding: false) else {
+                fatalError("Archive selectedMenux failed")
+            }
+
+            let ud = UserDefaults.standard
+            ud.set(archiveData, forKey: ukSelectedMenuMart)
+            ud.synchronize()
+        }
+
+    }
+}
+var selectedMenux: [SelectedMenu]? {
+    get {
+        if let loadedData = UserDefaults().data(forKey: ukSelectedMenu) {
+            
+            return try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(loadedData) as? [SelectedMenu]
+
+        }
+        return nil
+    }
+    set(v) {
+        if let value = v {
+            guard let archiveData = try? NSKeyedArchiver.archivedData(withRootObject: value, requiringSecureCoding: false) else {
+                fatalError("Archive selectedMenux failed")
+            }
+
+            let ud = UserDefaults.standard
+            ud.set(archiveData, forKey: ukSelectedMenu)
+            ud.synchronize()
+        }
+
+    }
+}
 
 func getFCMToken() -> String {
     guard let token = fCMTokenx else{return "No token value."}

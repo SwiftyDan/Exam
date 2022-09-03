@@ -14,8 +14,8 @@ class  DetailsViewController : BaseViewController {
 
     // MARK: - Properties
 
-    private var data: Photos?
-
+    private var data: Recipe?
+    private var recentData: SelectedMenu?
     
     // MARK: - UI Component
     private let scrollContentView: UIView = {
@@ -60,18 +60,34 @@ class  DetailsViewController : BaseViewController {
    }()
     let shareBtn: BaseButton = {
         let btn = BaseButton()
-        btn.title("Click to Share", color: .rgb(136), selectedColor: .rgb(136), size: 15, alignment: .right, isBold: false)
-        btn.isSelected = true
+        btn.round(5, color: .rgb(226), selectedColor: .rgb(226), width: 1, backgroud: .rgb(58,90,152,255))
+        btn.title("Share Recipe", color: .white, size: 15, alignment: .center, isBold: false)
         return btn
    }()
     
-    
+    private let instructBtn: BaseButton = {
+        let btn = BaseButton()
+        btn.round(5, color: .rgb(226), selectedColor: .rgb(226), width: 1, backgroud: .rgb(58,90,152,255))
+        btn.title("View Instruction", color: .white, size: 15, alignment: .center, isBold: false)
+
+        return btn
+    }()
+    private let originalBtn: BaseButton = {
+        let btn = BaseButton()
+        btn.round(5, color: .rgb(226), selectedColor: .rgb(226), width: 1, backgroud: .rgb(58,90,152,255))
+        btn.title("View Original", color: .white, size: 15, alignment: .center, isBold: false)
+
+        
+        btn.alignHorizontal(spacing: 10)
+        return btn
+    }()
     // MARK: - Override
-    init(data: Photos) {
+    init(_ data: Recipe? = nil, recent: SelectedMenu? = nil) {
         super.init(nibName: nil, bundle: nil)
         self.data = data
-      
-        print(data,"STATEEE")
+        self.recentData = recent
+        originalBtn.addTarget(self, action: #selector(didClickOrig), for: .touchUpInside)
+        instructBtn.addTarget(self, action: #selector(didclickInstruction), for: .touchUpInside)
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -85,6 +101,8 @@ class  DetailsViewController : BaseViewController {
         scrollView.addSubview(dateLabel)
         scrollView.addSubview(shareBtn)
         scrollView.addSubview(titleLbl)
+        scrollView.addSubview(instructBtn)
+        scrollView.addSubview(originalBtn)
       
         let margins = view.safeAreaLayoutGuide
         
@@ -98,22 +116,32 @@ class  DetailsViewController : BaseViewController {
         scrollView.leadingAnchor.constraint(equalTo: scrollContentView.leadingAnchor).isActive = true
         scrollView.trailingAnchor.constraint(equalTo: scrollContentView.trailingAnchor).isActive = true
         scrollView.heightAnchor.constraint(equalTo: scrollContentView.heightAnchor).isActive = true
-        scrollView.bottomAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 10).isActive = true
+        scrollView.bottomAnchor.constraint(equalTo: originalBtn.bottomAnchor, constant: 10).isActive = true
         
         imgMethod.topAnchor.constraint(equalTo: scrollView.topAnchor,constant: 20).isActive = true
         imgMethod.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
       
-        titleLbl.topAnchor.constraint(equalTo: shareBtn.bottomAnchor).isActive = true
-        titleLbl.leadingAnchor.constraint(equalTo: imgMethod.leadingAnchor).isActive = true
+        titleLbl.topAnchor.constraint(equalTo: imgMethod.bottomAnchor,constant: 10).isActive = true
+        titleLbl.centerXAnchor.constraint(equalTo: imgMethod.centerXAnchor).isActive = true
         
         dateLabel.topAnchor.constraint(equalTo: titleLbl.bottomAnchor,constant: 10).isActive = true
         dateLabel.centerXAnchor.constraint(equalTo: imgMethod.centerXAnchor).isActive = true
         dateLabel.leadingAnchor.constraint(equalTo: imgMethod.leadingAnchor).isActive = true
         dateLabel.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor,constant: -20).isActive = true
         
-        shareBtn.topAnchor.constraint(equalTo: imgMethod.bottomAnchor).isActive = true
+        shareBtn.topAnchor.constraint(equalTo: dateLabel.bottomAnchor,constant: 10).isActive = true
         shareBtn.leadingAnchor.constraint(equalTo: imgMethod.leadingAnchor).isActive = true
-      
+        
+        instructBtn.topAnchor.constraint(equalTo: shareBtn.bottomAnchor).isActive = true
+        instructBtn.leadingAnchor.constraint(equalTo: imgMethod.leadingAnchor).isActive = true
+        
+        originalBtn.topAnchor.constraint(equalTo: instructBtn.bottomAnchor).isActive = true
+        originalBtn.leadingAnchor.constraint(equalTo: imgMethod.leadingAnchor).isActive = true
+        
+        originalBtn.widthAnchor.constraint(equalToConstant: 200).isActive = true
+        shareBtn.widthAnchor.constraint(equalToConstant: 200).isActive = true
+        instructBtn.widthAnchor.constraint(equalToConstant: 200).isActive = true
+        
         imgMethod.widthAnchor.constraint(equalToConstant: 300).isActive = true
         imgMethod.heightAnchor.constraint(equalToConstant: 300).isActive = true
         
@@ -169,7 +197,18 @@ class  DetailsViewController : BaseViewController {
        
        setTitleView(view: containerView)
    }
-   
+    @objc private func didclickInstruction() {
+        
+        let vc = WebView(title: data?.title ?? "", content: data?.source_url ?? "")
+        self.show(vc)
+
+    }
+    @objc private func didClickOrig() {
+        
+        let vc = WebView(title: data?.title ?? "", content: data?.publisher_url ?? "")
+        self.show(vc)
+
+    }
 }
 
 // MARK: - Layout
@@ -179,20 +218,20 @@ extension DetailsViewController {
     private func loadData() {
         shareBtn.addTarget(self, action: #selector(didClickLogin(_:)), for: .touchUpInside)
  
-        if let imageUrl = data?.url, let url = URL(string: imageUrl) {
+        if let imageUrl = data?.image_url ?? recentData?.image_url, let url = URL(string: imageUrl) {
           
             imgMethod.kf.indicatorType = .activity
-           
-                dateLabel.text = data?.title
+            titleLbl.text = data?.publisher ?? recentData?.publisher
+                dateLabel.text = data?.title ?? recentData?.title
               
             imgMethod.kf.setImage(with: url, placeholder: UIImage(named: "Home-fill"), options: nil, progressBlock: nil, completionHandler: nil)
-            setNavTitle(title: "\(data?.id ?? 0)")
+            setNavTitle(title: "\(data?.recipe_id ?? recentData?.recipe_id)")
         }
         
     }
     @objc func didClickLogin(_ sender: UIButton) {
         let someText:String = data?.title ?? ""
-        let objectsToShare:URL = URL(string: data?.thumbnailUrl ?? "")!
+        let objectsToShare:URL = URL(string: data?.source_url ?? "")!
           let sharedObjects:[AnyObject] = [objectsToShare as AnyObject,someText as AnyObject]
           let activityViewController = UIActivityViewController(activityItems : sharedObjects, applicationActivities: nil)
           activityViewController.popoverPresentationController?.sourceView = self.view

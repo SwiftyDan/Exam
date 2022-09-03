@@ -75,18 +75,12 @@ class SplashViewController: BaseViewController {
 
 
     private func showStartViewController() {
-       
-     print("WT")
+ 
             let vc = MainViewController()
             show(vc)
-       
-        
             return
         }
         
-
-   
-    
     // MARK: - Network
  
     

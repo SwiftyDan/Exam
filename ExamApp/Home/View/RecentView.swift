@@ -1,22 +1,22 @@
 //
-//  PhotosView.swift
+//  RecentView.swift
 //  ExamApp
 //
-//  Created by Dan Albert Luab on 8/29/22.
+//  Created by Dan Albert Luab on 9/3/22.
 //
 
 import UIKit
 
-protocol CategoryViewDelegate: NSObjectProtocol {
-    func categoryViewDidSelect(_ view: CategoryView, category: Recipe)
+protocol RecentViewDelegate: NSObjectProtocol {
+    func recentViewDidSelect(_ view: RecentView, category: SelectedMenu)
 }
 
-class CategoryView: BaseView {
+class RecentView: BaseView {
     
     // MARK: - Properties
     
-    weak var delegate: CategoryViewDelegate?
-    private var category = [Recipe]()
+    weak var delegate: RecentViewDelegate?
+    private var recentData = [SelectedMenu?]()
   
     
     // MARK: - UI Component
@@ -32,7 +32,7 @@ class CategoryView: BaseView {
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.isScrollEnabled = false
         collectionView.isPagingEnabled = false
-        collectionView.register(cellType: HomeCategoryCollectionViewCell.self)
+        collectionView.register(cellType: RecentCell.self)
         
         
         return collectionView
@@ -62,12 +62,12 @@ class CategoryView: BaseView {
     
     // MARK: - Internal Method
     
-    func configure(_ category: [Recipe]) {
+    func configure(_ data: [SelectedMenu?]) {
       
     
-        
-        self.category = category
        
+        self.recentData = data
+        
         collectionViews.reloadData()
     }
     
@@ -78,7 +78,7 @@ class CategoryView: BaseView {
     
 }
 //MARK: - LayOut
-extension CategoryView {
+extension RecentView {
     
     private func layout() {
         
@@ -90,12 +90,13 @@ extension CategoryView {
 }
 
 //MARK: - CollectionViewDataSource
-extension CategoryView: UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
+extension RecentView: UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
     
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        reloadDelegate()
       
-        return category.count
+        return recentData.count
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
@@ -103,9 +104,10 @@ extension CategoryView: UICollectionViewDataSource,UICollectionViewDelegateFlowL
        
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: HomeCategoryCollectionViewCell.self)
+        let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: RecentCell.self)
         cell.backgroundColor = .rgb(243,243,243,255)
-        cell.configure(category[indexPath.row])
+        
+        cell.configure(recentData[indexPath.row])
  
         return cell
     }
@@ -120,7 +122,7 @@ extension CategoryView: UICollectionViewDataSource,UICollectionViewDelegateFlowL
 }
 
 //MARK: - CollectionViewDelegate
-extension CategoryView: UICollectionViewDelegate {
+extension RecentView: UICollectionViewDelegate {
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         
@@ -131,8 +133,8 @@ extension CategoryView: UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cat = category[indexPath.item]
-        delegate?.categoryViewDidSelect(self, category: cat)
+        guard let cat = recentData[indexPath.item] else { return  }
+        delegate?.recentViewDidSelect(self, category: cat)
     }
 
 }

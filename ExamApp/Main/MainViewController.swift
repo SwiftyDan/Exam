@@ -74,32 +74,17 @@ final class MainViewController: UITabBarController {
         let controller = HomeViewController()
         return controller
     }()
-  
+    private let recentVC: RecentVC = {
+        let controller = RecentVC()
+        return controller
+    }()
     
     //MARK: - override
 
     private func setupTestingEnvironment(with arguments: [String]) {
    
     }
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-           print("the view is rotated")
-        var arguments = ProcessInfo.processInfo.arguments
-        arguments.removeFirst()
-        setupTestingEnvironment(with: arguments)
-     
-        
-        navigationController?.navigationBar.isTranslucent = false
-        navigationController?.navigationBar.tintColor = .beeYellow
-        navigationController?.navigationBar.barTintColor = .beeYellow
-        navigationController?.navigationBar.titleTextAttributes = [
-            NSAttributedString.Key.foregroundColor: UIColor.white
-        ]
-        registerSocket()
-        initialSetting()
-        self.delegate = self
 
-        setIndex(index: 0)
-    }
     override func viewDidLoad() {
         super.viewDidLoad()
        
@@ -208,12 +193,12 @@ final class MainViewController: UITabBarController {
         tabFifth.tag = 4
         
         homeVC.tabBarItem = tabFirst
-        homeVC.tabBarItem = tabSecond
+        recentVC.tabBarItem = tabSecond
         homeVC.tabBarItem = tabThird
         homeVC.tabBarItem = tabFourth
         homeVC.tabBarItem = tabFifth
         
-        self.viewControllers = [homeVC,homeVC]
+        self.viewControllers = [homeVC,recentVC]
         
     }
     
@@ -297,10 +282,15 @@ final class MainViewController: UITabBarController {
         
         let title = BaseLabel()
         title.configure(font: .godo_B(16), color: .black)
-     
-            title.text = "Exam"
+        if index == 0 {
+            title.text = "Recipes"
             navigationItem.titleView = title
             navigationItem.rightBarButtonItem = nil
+        }else {
+            title.text = "Recent"
+            navigationItem.titleView = title
+            navigationItem.rightBarButtonItem = nil
+        }
  
     }
     

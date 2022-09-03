@@ -1,13 +1,13 @@
 //
-//  PhotosCell.swift
+//  RecentCell.swift
 //  ExamApp
 //
-//  Created by Dan Albert Luab on 8/29/22.
+//  Created by Dan Albert Luab on 9/3/22.
 //
 
 import UIKit
 
-class HomeCategoryCollectionViewCell: UICollectionViewCell {
+class RecentCell: UICollectionViewCell {
     // MARK: - UI Component
 
      let imageView: UIImageView = {
@@ -50,20 +50,20 @@ class HomeCategoryCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Internal Method
     
-    func configure(_ category: Recipe) {
+    func configure(_ category: SelectedMenu?) {
   
         contentView.addSubview(self.imageView)
         contentView.addSubview(titleLabel)
         imageView.addSubview(idLabel)
         imageView.backgroundColor = .white
         layout2()
-  
-        if let imageUrl = category.image_url, let url = URL(string: imageUrl) {
+       
+        if let imageUrl = category?.image_url, let url = URL(string: imageUrl) {
          
             imageView.kf.indicatorType = .activity
             imageView.kf.setImage(with: url, options: [.memoryCacheExpiration(.days(3))])
-            titleLabel.text = category.title
-            idLabel.text = "ID:\(category.recipe_id ?? "")"
+            titleLabel.text = category?.title
+            idLabel.text = "ID:\(category?.recipe_id ?? "")"
         }
            
            
@@ -80,7 +80,7 @@ class HomeCategoryCollectionViewCell: UICollectionViewCell {
 }
 
 //MARK: - Layout
-extension HomeCategoryCollectionViewCell {
+extension RecentCell {
     private func layout2() {
 
 
@@ -100,51 +100,6 @@ extension HomeCategoryCollectionViewCell {
         idLabel.bottomAnchor.constraint(equalTo: imageView.bottomAnchor,constant: -5).isActive = true
         idLabel.widthAnchor.constraint(equalToConstant: 70).isActive = true
     
-    }
-    
-}
-
-extension UIView {
-
-func roundCorners(radius: CGFloat = 20, corners: UIRectCorner = .allCorners) {
-        self.clipsToBounds = true
-        self.layer.cornerRadius = radius
-        if #available(iOS 11.0, *) {
-            var arr: CACornerMask = []
-            
-            let allCorners: [UIRectCorner] = [.topLeft, .topRight, .bottomLeft, .bottomRight, .allCorners]
-            
-            for corn in allCorners {
-                if(corners.contains(corn)){
-                    switch corn {
-                    case .topLeft:
-                        arr.insert(.layerMinXMinYCorner)
-                    case .topRight:
-                        arr.insert(.layerMaxXMinYCorner)
-                    case .bottomLeft:
-                        arr.insert(.layerMinXMaxYCorner)
-                    case .bottomRight:
-                        arr.insert(.layerMaxXMaxYCorner)
-                    case .allCorners:
-                        arr.insert(.layerMinXMinYCorner)
-                        arr.insert(.layerMaxXMinYCorner)
-                        arr.insert(.layerMinXMaxYCorner)
-                        arr.insert(.layerMaxXMaxYCorner)
-                    default: break
-                    }
-                }
-            }
-            self.layer.maskedCorners = arr
-        } else {
-            self.roundCornersBezierPath(corners: corners, radius: radius)
-        }
-    }
-    
-    private func roundCornersBezierPath(corners: UIRectCorner, radius: CGFloat) {
-        let path = UIBezierPath(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
-        let mask = CAShapeLayer()
-        mask.path = path.cgPath
-        layer.mask = mask
     }
     
 }

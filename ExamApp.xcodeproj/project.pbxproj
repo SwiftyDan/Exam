@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		22B476CB28C313B000A5E171 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B476CA28C313B000A5E171 /* SearchVC.swift */; };
+		22B476CD28C3166300A5E171 /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B476CC28C3166300A5E171 /* SearchCell.swift */; };
+		22B476D128C3204700A5E171 /* Webview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B476D028C3204700A5E171 /* Webview.swift */; };
+		22B476D528C3263000A5E171 /* RecentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B476D428C3263000A5E171 /* RecentVC.swift */; };
+		22B476D728C3338C00A5E171 /* RecentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B476D628C3338C00A5E171 /* RecentCell.swift */; };
+		22B476D928C333E200A5E171 /* RecentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B476D828C333E200A5E171 /* RecentView.swift */; };
 		22B5259E28BC8F420053538B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B5259D28BC8F420053538B /* AppDelegate.swift */; };
 		22B525A028BC8F420053538B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B5259F28BC8F420053538B /* SceneDelegate.swift */; };
 		22B525A228BC8F420053538B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B525A128BC8F420053538B /* ViewController.swift */; };
@@ -75,6 +81,12 @@
 
 /* Begin PBXFileReference section */
 		03F067C342074D1FD0F6689F /* Pods_ExamApp_ExamAppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ExamApp_ExamAppUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		22B476CA28C313B000A5E171 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
+		22B476CC28C3166300A5E171 /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
+		22B476D028C3204700A5E171 /* Webview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Webview.swift; sourceTree = "<group>"; };
+		22B476D428C3263000A5E171 /* RecentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentVC.swift; sourceTree = "<group>"; };
+		22B476D628C3338C00A5E171 /* RecentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentCell.swift; sourceTree = "<group>"; };
+		22B476D828C333E200A5E171 /* RecentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentView.swift; sourceTree = "<group>"; };
 		22B5259A28BC8F420053538B /* ExamApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExamApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22B5259D28BC8F420053538B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		22B5259F28BC8F420053538B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -324,6 +336,8 @@
 			isa = PBXGroup;
 			children = (
 				22B5267D28BCB4A30053538B /* PhotosCell.swift */,
+				22B476CC28C3166300A5E171 /* SearchCell.swift */,
+				22B476D628C3338C00A5E171 /* RecentCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -340,6 +354,7 @@
 			isa = PBXGroup;
 			children = (
 				22B5267728BCAF860053538B /* PhotosView.swift */,
+				22B476D828C333E200A5E171 /* RecentView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -349,6 +364,9 @@
 			children = (
 				22B5267F28BCC97E0053538B /* DetailsViewController.swift */,
 				22B5265E28BC92A00053538B /* HomeViewController.swift */,
+				22B476CA28C313B000A5E171 /* SearchVC.swift */,
+				22B476D028C3204700A5E171 /* Webview.swift */,
+				22B476D428C3263000A5E171 /* RecentVC.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -629,26 +647,32 @@
 				22B525FB28BC90490053538B /* BaseNavigationController.swift in Sources */,
 				22B5261028BC90490053538B /* BaseButton.swift in Sources */,
 				22B525FA28BC90490053538B /* DropDownMenuTableViewController.swift in Sources */,
+				22B476CB28C313B000A5E171 /* SearchVC.swift in Sources */,
 				22B5260528BC90490053538B /* UIFontExtension.swift in Sources */,
 				22B525A228BC8F420053538B /* ViewController.swift in Sources */,
 				22B525F928BC90490053538B /* BaseViewController.swift in Sources */,
 				22B5260728BC90490053538B /* StringExtension.swift in Sources */,
 				22B5260628BC90490053538B /* CGColorExtension.swift in Sources */,
 				22B5260828BC90490053538B /* UIImageExtension.swift in Sources */,
+				22B476D728C3338C00A5E171 /* RecentCell.swift in Sources */,
 				22B5260F28BC90490053538B /* CustomPageControl.swift in Sources */,
 				22B5267A28BCB2990053538B /* HomeService.swift in Sources */,
 				22B5267C28BCB31B0053538B /* Photos.swift in Sources */,
 				22B525FD28BC90490053538B /* UIImageViewExtension.swift in Sources */,
 				22B5260A28BC90490053538B /* AppConstants.swift in Sources */,
+				22B476D128C3204700A5E171 /* Webview.swift in Sources */,
 				22B5263328BC90F80053538B /* MainViewController.swift in Sources */,
+				22B476D928C333E200A5E171 /* RecentView.swift in Sources */,
 				22B5260E28BC90490053538B /* BaseTextField.swift in Sources */,
 				22B5259E28BC8F420053538B /* AppDelegate.swift in Sources */,
 				22B525F428BC90490053538B /* UserDefault.swift in Sources */,
 				22B525F328BC90490053538B /* UserDefaultsKeys.swift in Sources */,
 				22B525FE28BC90490053538B /* UIColorExtension.swift in Sources */,
 				22B5263128BC90F80053538B /* SplashViewController.swift in Sources */,
+				22B476CD28C3166300A5E171 /* SearchCell.swift in Sources */,
 				22B5260228BC90490053538B /* UIViewControllerExtension.swift in Sources */,
 				22B525F828BC90490053538B /* BaseView.swift in Sources */,
+				22B476D528C3263000A5E171 /* RecentVC.swift in Sources */,
 				22B525FC28BC90490053538B /* UITableViewCellExtension.swift in Sources */,
 				22B5267228BC92A00053538B /* HomeViewController.swift in Sources */,
 				22B525A028BC8F420053538B /* SceneDelegate.swift in Sources */,
